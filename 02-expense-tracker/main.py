@@ -23,8 +23,24 @@ def view_expense():
         print("No expense recorded yet")
 
     else:
+        for index,expense in enumerate(expenses, start=1):
+            print(f"{index}.item : {expense['description']} | price  $ {expense['price']} | category  {expense['category']}")
+
+def total_spending():
+    if len(expenses) == 0:
+        print("No expense recorded yet")
+
+    else:
+        total = 0.0
         for expense in expenses:
-            print(f"01: item : {expense['description']} | price  $ {expense: ['price']} | category  {expense: ['category']}")
+            total = total + expense["price"]
+        print(f"Total spent: {total:.2f}")
+
+
+
+
+
+
 
 
 while True:
@@ -43,7 +59,7 @@ while True:
     elif choice == "2":
         view_expense()
     elif choice == "3":
-        print("Viewing total spending feature coming soon")
+        total_spending()
     elif choice == "4":
         print("Goodbye!!!")
         break
