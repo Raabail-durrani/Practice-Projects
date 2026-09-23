@@ -17,14 +17,14 @@ def add_Student():
         print("NO RECORD")
         return
 
-    roll_number = int(input(" STUDENT ROLL NO. : "))
+    roll_number = (input(" STUDENT ROLL NO. : "))
     if not roll_number.isdigit():
         print(" VALUE ERROR: ENTER NUMBER ONLY")
         return
     if any(student["roll_number"] == roll_number for student in students):
         print(" ERROR: Student with this roll number already exists")
         return
-    roll_number = int(roll_number)
+    roll_number = (roll_number)
     new_student={ "student_name":student_name,
                  "roll_number": roll_number,
                   "grades": {} 
@@ -44,10 +44,14 @@ def view_student():
             print(f"{student['student_name']} | {student['roll_number']} |{student['grades']} ")
 
             
-
-
+def find_student_by_roll(roll_number):
+    for student in students:
+        if student["roll_number"] == roll_number :
+            return student
+        return None
+    
 def add_update_grades():
-    pass
+    
 
 
 
