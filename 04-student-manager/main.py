@@ -21,10 +21,13 @@ def add_Student():
     if not roll_number.isdigit():
         print(" VALUE ERROR: ENTER NUMBER ONLY")
         return
+
+    roll_number = int(roll_number)
+
     if any(student["roll_number"] == roll_number for student in students):
         print(" ERROR: Student with this roll number already exists")
         return
-    roll_number = (roll_number)
+    roll_number = int(roll_number)
     new_student={ "student_name":student_name,
                  "roll_number": roll_number,
                   "grades": {} 
@@ -41,28 +44,49 @@ def view_student():
 
     else:
         for student in students:
-            print(f"{student['student_name']} | {student['roll_number']} |{student['grades']} ")
+            print(f"{student['student_name']} | {student['roll_number']}")
+
+
 
             
 def find_student_by_roll(roll_number):
     for student in students:
         if student["roll_number"] == roll_number :
             return student
-        return None
+    return None
+
+
     
 def add_update_grades():
     roll_number = input(" enter student roll number: ")
     if not roll_number.isdigit():
-        int(roll_number)
+        print("ERROR: ENTER NUMBER ONLY!!!!")
+        return
+    roll_number= int(roll_number)
+
     student= find_student_by_roll(roll_number)
+
     if student is None:
         print(" STUDENT NOT FOUND!!!")
         return
 
+    subject_name = input("Subject Name: ").strip()
+    if subject_name == "" :
+        print(" NO subject Recorded yet!")
+        return
     
+    update_grades = input("Score: ")
+    try:
+        update_grades = float(update_grades)
+    except ValueError:
+        print("ERROR: Score must be a valid number!")
+        return
 
-
-
+    if update_grades < 0 or update_grades > 100:
+        print(" ERROR")
+        return
+    student["grades"][subject_name] = update_grades
+    print(" Grades Updated!")
 
 
 
@@ -90,7 +114,6 @@ def main():
             view_student()
 
         elif choice == "3":
-            print("Adding or updating student's record feature coming soon")
             add_update_grades()
 
         elif choice == "4":
