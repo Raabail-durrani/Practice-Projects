@@ -73,7 +73,6 @@ def main():
             add_Student()
 
         elif choice == "2":
-            print("Viewing all students feature coming soon!!!")
             view_student()
 
         elif choice == "3":
