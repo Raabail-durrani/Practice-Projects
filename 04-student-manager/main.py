@@ -51,7 +51,17 @@ def find_student_by_roll(roll_number):
         return None
     
 def add_update_grades():
+    roll_number = input(" enter student roll number: ")
+    if not roll_number.isdigit():
+        int(roll_number)
+    student= find_student_by_roll(roll_number)
+    if student is None:
+        print(" STUDENT NOT FOUND!!!")
+        return
+
     
+
+
 
 
 
