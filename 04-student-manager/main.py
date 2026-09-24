@@ -91,13 +91,48 @@ def add_update_grades():
 
 
 def view_report():
-    pass
+    roll_number = input("Student Roll Number: ")
+    if not roll_number.isdigit():
+        print(" ERROR: ENTER A NUMBER ONLY")
+        return
+    roll_number = int(roll_number)
+    student = find_student_by_roll(roll_number)
+    if student is None:
+       print("ERROR: ")
+       return
+    if len(student["grades"]) == 0:
+        print(" No grades recorded yet for this students")
+        return
+    else:
+        print("\n ==== REPORT CARD ==== ")
+        print(f"NAME: {student["student_name"]} | ROLL NUMBER: {student["roll_number"]} ")
 
 
+        total_score = 0
+        for subject, score in student["grades"].items():
+            print(f"SUBJECT: {subject}  |  SCORE: {score}")
+            total_score += score
 
+        avg = total_score/ len(student["grades"])
+
+        print(f"{student['student_name']} scored an average of {avg:.2f}")
+
+        
+              
+    
 
 def delete_student():
-    pass
+    roll_number = input(" Enter student ROLL NO: ")
+    if not roll_number.isdigit():
+        print("ERROR: ENTER DIGIT ONLY!!")
+        return
+    roll_number = int(roll_number)
+    student = find_student_by_roll(roll_number)
+    if student is None:
+        print(" SRUDENT NOT FOUND!!!")
+    else:
+        students.remove(student)
+        print(" STUDENT REMOVED FROM RECORD SUCCESSFULLY!!!")
 
 
 
@@ -117,11 +152,9 @@ def main():
             add_update_grades()
 
         elif choice == "4":
-            print("Viewing student report card feature coming ssoon!!!")
             view_report()
 
         elif choice == "5":
-            print("deleting a student record coming soon!!!")
             delete_student()
 
         elif choice == "6":
